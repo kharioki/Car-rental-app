@@ -1,3 +1,4 @@
+import 'package:car_rental/car_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:car_rental/constants.dart';
@@ -9,6 +10,8 @@ class Showroom extends StatefulWidget {
 }
 
 class _ShowroomState extends State<Showroom> {
+  List<Car> cars = getCarList();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,8 +73,76 @@ class _ShowroomState extends State<Showroom> {
               ),
             ),
           ),
+          Expanded(
+            child: SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.grey[100],
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30),
+                  ),
+                ),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(16),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'TOP DEALS',
+                            style: TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey[400],
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                'view all',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey[400],
+                                ),
+                              ),
+                              SizedBox(width: 8),
+                              Icon(
+                                Icons.arrow_forward_ios,
+                                size: 12,
+                                color: kPrimaryColor,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      height: 280,
+                      child: ListView(
+                        physics: BouncingScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        children: buildDeals(),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
+  }
+
+  List<Widget> buildDeals() {
+    List<Widget> list = [];
+    for (var i = 0; i < cars.length; i++) {
+      list.add(buildCar(cars[i], i));
+    }
+    return list;
   }
 }
