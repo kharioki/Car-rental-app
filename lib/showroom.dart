@@ -1,3 +1,4 @@
+import 'package:car_rental/available_cars.dart';
 import 'package:car_rental/car_widget.dart';
 import 'package:car_rental/dealer_widget.dart';
 import 'package:flutter/material.dart';
@@ -142,7 +143,13 @@ class _ShowroomState extends State<Showroom> {
                       ),
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AvailableCars()),
+                        );
+                      },
                       child: Padding(
                         padding: EdgeInsets.only(top: 16, right: 16, left: 16),
                         child: Container(
@@ -235,6 +242,7 @@ class _ShowroomState extends State<Showroom> {
                     ),
                     Container(
                       height: 150,
+                      margin: EdgeInsets.only(bottom: 16),
                       child: ListView(
                         physics: BouncingScrollPhysics(),
                         scrollDirection: Axis.horizontal,
