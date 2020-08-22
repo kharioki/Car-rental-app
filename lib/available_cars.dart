@@ -1,3 +1,4 @@
+import 'package:car_rental/book_car.dart';
 import 'package:car_rental/car_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:car_rental/constants.dart';
@@ -73,7 +74,16 @@ class _AvailableCarsState extends State<AvailableCars> {
                   crossAxisSpacing: 15,
                   mainAxisSpacing: 15,
                   children: getCarList().map((item) {
-                    return buildCar(item, null);
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => BookCar(car: item)),
+                        );
+                      },
+                      child: buildCar(item, null),
+                    );
                   }).toList(),
                 ),
               ),

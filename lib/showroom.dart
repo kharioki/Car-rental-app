@@ -1,4 +1,5 @@
 import 'package:car_rental/available_cars.dart';
+import 'package:car_rental/book_car.dart';
 import 'package:car_rental/car_widget.dart';
 import 'package:car_rental/dealer_widget.dart';
 import 'package:flutter/material.dart';
@@ -276,7 +277,15 @@ class _ShowroomState extends State<Showroom> {
   List<Widget> buildDeals() {
     List<Widget> list = [];
     for (var i = 0; i < cars.length; i++) {
-      list.add(buildCar(cars[i], i));
+      list.add(GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => BookCar(car: cars[i])),
+          );
+        },
+        child: buildCar(cars[i], i),
+      ));
     }
     return list;
   }
